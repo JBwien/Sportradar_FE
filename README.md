@@ -44,11 +44,11 @@ Filter Events:
 	Use the dropdown menu at the top of the calendar to filter events by sport.
 View Event Details:
 
-Click on a highlighted day in the calendar to view events for that day.
+	Click on a highlighted day in the calendar to view events for that day.
 
 
-Project Structure
-	index.html: The main HTML file.
-	styles.css: Contains the styles for the application.
-	script.js: Contains all the JavaScript logic.
-	events.json: Initial event data (used if local storage is empty).
+Project Structure:
+	index.html The main HTML file.
+	styles.css Contains the styles for the application.
+	script.js Contains all the JavaScript logic.
+	events.json Initial event data (used if local storage is empty).
