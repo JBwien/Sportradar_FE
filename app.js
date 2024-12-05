@@ -6,13 +6,24 @@ document.addEventListener("DOMContentLoaded", () => {
   let events = [];
   let currentDate = new Date();
 
-  // Load events.json
+  // Fetch events from JSON
   fetch("events.json")
     .then((res) => res.json())
     .then((data) => {
       events = data;
       loadCalendarView();
     });
+
+  // Fade-in Effect
+  const fadeInContent = (container) => {
+    container.style.opacity = "0";
+    container.style.transform = "translateY(10px)";
+    setTimeout(() => {
+      container.style.transition = "all 0.5s ease";
+      container.style.opacity = "1";
+      container.style.transform = "translateY(0)";
+    }, 50);
+  };
 
   // Load Calendar View
   const loadCalendarView = () => {
@@ -28,13 +39,15 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="calendar"></div>
     `;
 
+    fadeInContent(app); // Apply fade-in effect
+
     const calendar = document.querySelector(".calendar");
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-    // Populate year dropdown
     const yearSelect = document.getElementById("year-select");
+    yearSelect.innerHTML = ""; // Populate year dropdown
     for (let year = 2000; year <= 2030; year++) {
       const option = document.createElement("option");
       option.value = year;
@@ -48,16 +61,16 @@ document.addEventListener("DOMContentLoaded", () => {
       loadCalendarView();
     });
 
-    // Populate days in the calendar
+    // Populate days
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(currentYear, currentMonth, day);
       const dayElement = document.createElement("div");
       dayElement.classList.add("day");
       dayElement.textContent = day;
 
-     // Create the date string without timezone offset
-      const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-      
+      const dateString = `${date.getFullYear()}-${String(
+        date.getMonth() + 1
+      ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
       const dayEvents = events.filter((event) => event.date === dateString);
 
       if (dayEvents.length > 0) {
@@ -70,7 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
       calendar.appendChild(dayElement);
     }
 
-    // Add Event Listeners for Month Navigation
     document.getElementById("prev-month").addEventListener("click", () => {
       currentDate.setMonth(currentDate.getMonth() - 1);
       loadCalendarView();
@@ -85,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Show Event Details
   const showEventDetails = (eventDetails) => {
     app.innerHTML = "";
+    fadeInContent(app); // Apply fade-in effect
     eventDetails.forEach((event) => {
       const detailDiv = document.createElement("div");
       detailDiv.innerHTML = `
@@ -107,6 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <button type="submit">Add Event</button>
       </form>
     `;
+
+    fadeInContent(app); // Apply fade-in effect
 
     document.getElementById("add-event-form").addEventListener("submit", (e) => {
       e.preventDefault();
