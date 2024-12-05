@@ -117,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <input type="time" id="event-time" required />
         <input type="text" id="event-sport" placeholder="Sport" required />
         <input type="text" id="event-teams" placeholder="Teams/Participants" required />
+        <textarea id="event-description" placeholder="Description" rows="4" required></textarea>
         <button type="submit">Add Event</button>
       </form>
     `;
@@ -131,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         time: document.getElementById("event-time").value,
         sport: document.getElementById("event-sport").value,
         teams: document.getElementById("event-teams").value,
+        description: document.getElementById("event-description").value,
       };
 
       events.push(newEvent);
