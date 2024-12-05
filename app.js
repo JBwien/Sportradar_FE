@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (dayEvents.length > 0) {
         const marker = document.createElement("div");
         marker.classList.add("event-marker");
-        marker.addEventListener("click", () => showEventDetails(dayEvents));
+        dayElement.addEventListener("click", () => showEventDetails(dayEvents));
         dayElement.appendChild(marker);
       }
 
