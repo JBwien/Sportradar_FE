@@ -55,8 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       dayElement.classList.add("day");
       dayElement.textContent = day;
 
-    // Create the date string without timezone offset
-
+      // Erstellen des Datumsstrings ohne Zeitzonenverschiebung
       const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
       
       const dayEvents = events.filter((event) => event.date === dateString);
@@ -64,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (dayEvents.length > 0) {
         const marker = document.createElement("div");
         marker.classList.add("event-marker");
-        dayElement.addEventListener("click", () => showEventDetails(dayEvents));
+        marker.addEventListener("click", () => showEventDetails(dayEvents));
         dayElement.appendChild(marker);
       }
 
@@ -129,4 +128,3 @@ document.addEventListener("DOMContentLoaded", () => {
   calendarBtn.addEventListener("click", loadCalendarView);
   addEventBtn.addEventListener("click", loadAddEventView);
 });
-
