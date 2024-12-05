@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Populate year dropdown
     const yearSelect = document.getElementById("year-select");
-    for (let year = 1990; year <= 2030; year++) {
+    for (let year = 2000; year <= 2030; year++) {
       const option = document.createElement("option");
       option.value = year;
       option.textContent = year;
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       dayElement.classList.add("day");
       dayElement.textContent = day;
 
-      // Erstellen des Datumsstrings ohne Zeitzonenverschiebung
+     // Create the date string without timezone offset
       const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
       
       const dayEvents = events.filter((event) => event.date === dateString);
