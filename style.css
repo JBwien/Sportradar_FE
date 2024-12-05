@@ -53,16 +53,6 @@ main {
   position: relative;
 }
 
-.event-marker {
-  background-color: red;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-}
-
 form {
   display: flex;
   flex-direction: column;
@@ -70,4 +60,51 @@ form {
 
 form input, form button {
   margin: 0.5rem 0;
+}
+/* General Transition */
+button, .day, .event-marker {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Button Hover */
+button:hover {
+    background-color: #ff7f50;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Day Hover */
+.day:hover {
+    background-color: rgba(30, 144, 255, 0.1);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Smooth Fade for Calendar View */
+.calendar, #calendar-controls, form {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Keyframes for Fade-in Animation */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Event Marker Style */
+.event-marker {
+    width: 6px;
+    height: 6px;
+    background-color: #ff4500;
+    border-radius: 50%;
+    margin: 2px auto;
+    transform: scale(1);
+}
+
+.event-marker:hover {
+    transform: scale(1.5);
 }
