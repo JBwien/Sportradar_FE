@@ -109,7 +109,7 @@ button:hover {
 .calendar, #calendar-controls, form {
   opacity: 0;
   transform: translateY(10px);
-  animation: fadeIn 2s forwards;
+  animation: fadeIn 1s forwards;
 }
 
 @keyframes fadeIn {
