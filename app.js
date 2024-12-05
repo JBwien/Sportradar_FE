@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let events = [];
   let currentDate = new Date();
+  let selectedSport = "All"; // Default sport filter
 
   // Fetch events from JSON
   fetch("events.json")
@@ -35,6 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
         })}</span>
         <select id="year-select"></select>
         <button id="next-month">Next</button>
+        <select id="sport-filter">
+          <option value="All">All Sports</option>
+        </select>
       </div>
       <div class="calendar"></div>
     `;
@@ -61,6 +65,22 @@ document.addEventListener("DOMContentLoaded", () => {
       loadCalendarView();
     });
 
+    // Populate sport filter
+    const sportFilter = document.getElementById("sport-filter");
+    const sports = [...new Set(events.map((event) => event.sport))];
+    sports.forEach((sport) => {
+      const option = document.createElement("option");
+      option.value = sport;
+      option.textContent = sport;
+      sportFilter.appendChild(option);
+    });
+
+    sportFilter.value = selectedSport; // Set current filter
+    sportFilter.addEventListener("change", (e) => {
+      selectedSport = e.target.value;
+      loadCalendarView();
+    });
+
     // Populate days
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(currentYear, currentMonth, day);
@@ -71,7 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const dateString = `${date.getFullYear()}-${String(
         date.getMonth() + 1
       ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-      const dayEvents = events.filter((event) => event.date === dateString);
+      let dayEvents = events.filter((event) => event.date === dateString);
+
+      // Apply sport filter
+      if (selectedSport !== "All") {
+        dayEvents = dayEvents.filter((event) => event.sport === selectedSport);
+      }
 
       if (dayEvents.length > 0) {
         const marker = document.createElement("div");
@@ -104,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3>${event.sport}: ${event.teams}</h3>
         <p>Date: ${event.date}</p>
         <p>Time: ${event.time}</p>
+        <p><strong>Description:</strong> ${event.description}</p>
       `;
       app.appendChild(detailDiv);
     });
