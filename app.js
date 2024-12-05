@@ -7,13 +7,27 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentDate = new Date();
   let selectedSport = "All"; // Default sport filter
 
-  // Fetch events from JSON
-  fetch("events.json")
-    .then((res) => res.json())
-    .then((data) => {
-      events = data;
-      loadCalendarView();
-    });
+  // Initialize Events from Local Storage or JSON file
+  const loadEvents = () => {
+    const storedEvents = localStorage.getItem("events");
+    if (storedEvents) {
+      events = JSON.parse(storedEvents);
+    } else {
+      // Fetch events.json if no local storage
+      fetch("events.json")
+        .then((res) => res.json())
+        .then((data) => {
+          events = data;
+          saveEventsToLocalStorage();
+          loadCalendarView();
+        });
+    }
+  };
+
+  // Save Events to Local Storage
+  const saveEventsToLocalStorage = () => {
+    localStorage.setItem("events", JSON.stringify(events));
+  };
 
   // Fade-in Effect
   const fadeInContent = (container) => {
@@ -162,6 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       events.push(newEvent);
+      saveEventsToLocalStorage(); // Save to local storage
       alert("Event added!");
       loadCalendarView();
     });
@@ -170,4 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Navigation
   calendarBtn.addEventListener("click", loadCalendarView);
   addEventBtn.addEventListener("click", loadAddEventView);
+
+  // Initialize
+  loadEvents();
 });
