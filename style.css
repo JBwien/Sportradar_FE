@@ -1,0 +1,72 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+nav button {
+  margin: 0 0.5rem;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+}
+
+main {
+  padding: 1rem;
+}
+
+#calendar-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+#calendar-controls span {
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+#year-select {
+  margin-left: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.day {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  text-align: center;
+  position: relative;
+}
+
+.event-marker {
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input, form button {
+  margin: 0.5rem 0;
+}
